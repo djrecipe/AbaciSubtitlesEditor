@@ -5,8 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Abaci.SubtitlesEditor.UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Subtitles Editor" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <TabControl VerticalAlignment="Stretch" Grid.Row="0">
+            <TabItem Header="Raw">
+                <Grid>
+                    <TextBlock Text="{Binding RawText}"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="List"></TabItem>
+            <TabItem Header="Timeline"></TabItem>
+        </TabControl>
     </Grid>
 </Window>
