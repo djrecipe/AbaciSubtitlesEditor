@@ -15,7 +15,7 @@ namespace Abaci.SubtitlesEditor.Tests
             int expected_count = 9;
             string text = File.ReadAllText("Abaci.SubtitlesEditor.Tests.TestRegex.srt");
             TextParser parser = new TextParser();
-            List<SubtitleEntry> list = parser.Parse(text);
+            SubtitleEntryCollection list = parser.Parse(text);
             foreach(SubtitleEntry entry in list)
             {
                 Console.WriteLine($"{entry.ToString()}\n");

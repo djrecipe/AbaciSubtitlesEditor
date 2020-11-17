@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SubtitleEntry.cs" />
+    <Compile Include="SubtitleEntryCollection.cs" />
     <Compile Include="TextParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -10,15 +10,15 @@ namespace Abaci.SubtitlesEditor
     internal class TextParser
     {
         private static string REGEX_MAIN = @"(?<Label>[^\r?\n]+\r?\n)* *((?<StartTime>\d{2}:\d{2}:\d{2}(,\d{3})*) *--> *(?<EndTime>\d{2}:\d{2}:\d{2}(,\d{3})*)) *(?<Content>(\r?\n[^\r?\n]+)*)";
-        public List<SubtitleEntry> Parse(string text)
+        public SubtitleEntryCollection Parse(string text)
         {
             Regex regex = new Regex(TextParser.REGEX_MAIN);
             MatchCollection matches = regex.Matches(text);
             return this.ProcessMatches(matches);
         }
-        private List<SubtitleEntry> ProcessMatches(MatchCollection matches)
+        private SubtitleEntryCollection ProcessMatches(MatchCollection matches)
         {
-            List<SubtitleEntry> subtitles = new List<SubtitleEntry>();
+            SubtitleEntryCollection subtitles = new SubtitleEntryCollection();
             foreach(Match match in matches)
             {
                 subtitles.Add(this.ProcessMatch(match));
