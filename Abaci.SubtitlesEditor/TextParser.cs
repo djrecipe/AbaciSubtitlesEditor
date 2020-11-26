@@ -33,8 +33,8 @@ namespace Abaci.SubtitlesEditor
             Group group_content = match.Groups["Content"];
             SubtitleEntry new_entry = new SubtitleEntry
             {
-                Content = group_content.Value.Trim(new char[]{'\n','\r',' '}),
-                Label = group_label.Success ? group_label.Value.Trim(new char[] { '\n', '\r', ' ' }) : null,
+                Content = group_content.Value.Trim('\n', '\r', ' ').Trim('\n', '\r', ' '),
+                Label = group_label.Success ? group_label.Value.Trim('\n', '\r', ' ').Trim('\n', '\r', ' ') : null,
                 StartTime = this.ProcessTimeString(group_start_time.Value),
                 EndTime = this.ProcessTimeString(group_end_time.Value)
             };

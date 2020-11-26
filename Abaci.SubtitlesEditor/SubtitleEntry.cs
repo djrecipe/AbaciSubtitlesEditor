@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Abaci.SubtitlesEditor
 {
-    class SubtitleEntry
+    public class SubtitleEntry
     {
         public string Content { get; set; }
         public string Label { get; set; }
@@ -15,6 +15,7 @@ namespace Abaci.SubtitlesEditor
         public override string ToString()
         {
             string text = $"{this.Label}\r\n{this.StartTime} --> {this.EndTime}\r\n{this.Content}";
+            text = text.Trim('\n', '\r', ' ').Trim('\n', '\r', ' ');
             return text;
         }
 

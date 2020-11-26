@@ -20,8 +20,11 @@ namespace Abaci.SubtitlesEditor.UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        internal MainWindowModel Model { get;set;}
         public MainWindow()
         {
+            this.Model = new MainWindowModel();
+            this.DataContext = this.Model;
             InitializeComponent();
         }
     }

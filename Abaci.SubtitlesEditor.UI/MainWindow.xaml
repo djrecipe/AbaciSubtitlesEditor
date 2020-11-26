@@ -11,14 +11,33 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
-        <TabControl VerticalAlignment="Stretch" Grid.Row="0">
+        <TabControl VerticalAlignment="Stretch" Grid.Row="0" SelectedIndex="{Binding SelectedTabIndex}">
             <TabItem Header="Raw">
                 <Grid>
-                    <TextBlock Text="{Binding RawText}"/>
+                    <TextBox Padding="10" VerticalScrollBarVisibility="Visible" Text="{Binding RawText}"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="List"></TabItem>
+            <TabItem Header="List">
+                <Grid>
+                    <DataGrid ItemsSource="{Binding Subtitles}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding StartTime}" Header="Start" Width="100"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding EndTime}" Header="End" Width="100"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Label}" Header="Label"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Content}" Header="Content" Width="*"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
             <TabItem Header="Timeline"></TabItem>
         </TabControl>
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <Button Width="120" Height="50" Margin="10" Content="_Open File" Command="{Binding CommandOpenFile}"></Button>
+            <Button Width="120" Height="50" Margin="10" Content="_Save File" Command="{Binding CommandSaveFile}"></Button>
+            <StackPanel Orientation="Vertical" Width="120" VerticalAlignment="Center" Margin="40,0,0,0">
+                <TextBox Text="{Binding Offset}" Width="120" Margin="0,0,0,5"></TextBox>
+                <Button Width="120" Height="35" Content="Apply Offset" Margin="0,5,0,0" Command="{Binding CommandApplyOffset}"></Button>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

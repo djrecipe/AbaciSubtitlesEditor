@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Abaci.SubtitlesEditor
 {
-    class SubtitleEntryCollection : ObservableCollection<SubtitleEntry>
+    public class SubtitleEntryCollection : ObservableCollection<SubtitleEntry>
     {
         public TimeSpan EndTime
         {
@@ -15,6 +15,12 @@ namespace Abaci.SubtitlesEditor
             {
                 return this.Items.Select(i => i.EndTime).Max();
             }
+        }
+
+        public override string ToString()
+        {
+            string text = string.Join("\r\n\r\n", this.Select(s => s.ToString()));
+            return text;
         }
     }
 }
