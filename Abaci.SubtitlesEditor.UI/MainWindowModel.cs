@@ -16,6 +16,7 @@ namespace Abaci.SubtitlesEditor.UI
     {
         private readonly SubtitleEntryFactory factory = new SubtitleEntryFactory();
         public event PropertyChangedEventHandler PropertyChanged;
+        public ICommand CommandApplyOffset { get; private set; }
         public ICommand CommandOpenFile { get; private set; }
         public ICommand CommandSaveFile { get; private set; }
         private TimeSpan _Offset = default(TimeSpan);
@@ -89,8 +90,13 @@ namespace Abaci.SubtitlesEditor.UI
         }
         internal MainWindowModel()
         {
+            this.CommandApplyOffset = new RelayCommand(this.ExecuteCommandApplyOffset, this.CanExecuteCommandApplyOffset);
             this.CommandOpenFile = new RelayCommand(this.ExecuteCommandOpenFile, this.CanExecuteCommandOpenFile);
             this.CommandSaveFile = new RelayCommand(this.ExecuteCommandSaveFile, this.CanExecuteCommandSaveFile);
+        }
+        private bool CanExecuteCommandApplyOffset()
+        {
+            return true;
         }
         private bool CanExecuteCommandOpenFile()
         {
@@ -99,6 +105,10 @@ namespace Abaci.SubtitlesEditor.UI
         private bool CanExecuteCommandSaveFile()
         {
             return true;
+        }
+        private void ExecuteCommandApplyOffset()
+        {
+            this.Subtitles.ApplyOffset(this.Offset);
         }
         private void ExecuteCommandOpenFile()
         {

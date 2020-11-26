@@ -16,7 +16,15 @@ namespace Abaci.SubtitlesEditor
                 return this.Items.Select(i => i.EndTime).Max();
             }
         }
-
+        public void ApplyOffset(TimeSpan offset)
+        {
+            foreach(SubtitleEntry subtitle in this)
+            {
+                subtitle.StartTime += offset;
+                subtitle.EndTime += offset;
+            }
+            return;
+        }
         public override string ToString()
         {
             string text = string.Join("\r\n\r\n", this.Select(s => s.ToString()));
