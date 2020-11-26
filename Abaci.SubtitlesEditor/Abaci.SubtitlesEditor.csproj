@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GoogleTranslationProvider.cs" />
+    <Compile Include="ITranslationProvider.cs" />
     <Compile Include="SubtitleEntry.cs" />
     <Compile Include="SubtitleEntryCollection.cs" />
     <Compile Include="SubtitleEntryFactory.cs" />

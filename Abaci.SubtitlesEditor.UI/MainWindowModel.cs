@@ -14,11 +14,13 @@ namespace Abaci.SubtitlesEditor.UI
 {
     internal class MainWindowModel : INotifyPropertyChanged
     {
+        private ITranslationProvider translator = null;
         private readonly SubtitleEntryFactory factory = new SubtitleEntryFactory();
         public event PropertyChangedEventHandler PropertyChanged;
         public ICommand CommandApplyOffset { get; private set; }
         public ICommand CommandOpenFile { get; private set; }
         public ICommand CommandSaveFile { get; private set; }
+        public ICommand CommandTranslate { get; private set; }
         private TimeSpan _Offset = default(TimeSpan);
         public TimeSpan Offset
         {
@@ -88,11 +90,26 @@ namespace Abaci.SubtitlesEditor.UI
                 return;
             }
         }
+        private string _TargetLanguage = "Thai";
+        public string TargetLanguage
+        {
+            get
+            {
+                return this._TargetLanguage.ToString();
+            }
+            set
+            {
+                this._TargetLanguage = value;
+                this.InvokePropertyChangedEvent(nameof(this.TargetLanguage));
+            }
+        }
         internal MainWindowModel()
         {
+            //this.translator = new GoogleTranslationProvider();
             this.CommandApplyOffset = new RelayCommand(this.ExecuteCommandApplyOffset, this.CanExecuteCommandApplyOffset);
             this.CommandOpenFile = new RelayCommand(this.ExecuteCommandOpenFile, this.CanExecuteCommandOpenFile);
             this.CommandSaveFile = new RelayCommand(this.ExecuteCommandSaveFile, this.CanExecuteCommandSaveFile);
+            this.CommandTranslate = new RelayCommand(this.ExecuteCommandTranslate, this.CanExecuteCommandTranslate);
         }
         private bool CanExecuteCommandApplyOffset()
         {
@@ -103,6 +120,10 @@ namespace Abaci.SubtitlesEditor.UI
             return true;
         }
         private bool CanExecuteCommandSaveFile()
+        {
+            return true;
+        }
+        private bool CanExecuteCommandTranslate()
         {
             return true;
         }
@@ -129,6 +150,10 @@ namespace Abaci.SubtitlesEditor.UI
             {
                 this.factory.Save(this.Subtitles, dialog.FileName);
             }
+        }
+        private void ExecuteCommandTranslate()
+        {
+            this.Subtitles.Translate(this.translator, this.TargetLanguage);
         }
         private void UpdateData()
         {
