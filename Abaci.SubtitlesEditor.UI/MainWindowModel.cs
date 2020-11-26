@@ -18,6 +18,34 @@ namespace Abaci.SubtitlesEditor.UI
         public event PropertyChangedEventHandler PropertyChanged;
         public ICommand CommandOpenFile { get; private set; }
         public ICommand CommandSaveFile { get; private set; }
+        private TimeSpan _Offset = default(TimeSpan);
+        public TimeSpan Offset
+        {
+            get
+            {
+                return this._Offset;
+            }
+            set
+            {
+                this._Offset = value;
+                this.InvokePropertyChangedEvent(nameof(this.Offset));
+                this.OffsetString = this.Offset.ToString();
+            }
+        }
+        public string OffsetString
+        {
+            get
+            {
+                return this.Offset.ToString();
+            }
+            set
+            {
+                TimeSpan result = default(TimeSpan);
+                TimeSpan.TryParse(value, out result);
+                this._Offset = result;
+                this.InvokePropertyChangedEvent(nameof(this.OffsetString));
+            }
+        }
         private string _RawText = null;
         public string RawText
         {
@@ -78,8 +106,8 @@ namespace Abaci.SubtitlesEditor.UI
             bool? result = dialog.ShowDialog();
             if (result == true)
             {
-                this.RawText = File.ReadAllText(dialog.FileName);
                 this.Subtitles = this.factory.CreateFromFile(dialog.FileName);
+                this.RawText = this.Subtitles.ToString();
             }
         }
         private void ExecuteCommandSaveFile()
@@ -97,7 +125,7 @@ namespace Abaci.SubtitlesEditor.UI
             switch(this.SelectedTabIndex)
             {
                 case 0:
-                    this.RawText = this.Subtitles.ToString();
+                    this.RawText = this.Subtitles?.ToString();
                     return;
                 case 1:
                     this.Subtitles = this.factory.CreateFromText(this.RawText);
