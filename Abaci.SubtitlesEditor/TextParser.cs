@@ -9,7 +9,7 @@ namespace Abaci.SubtitlesEditor
 {
     internal class TextParser
     {
-        private static string REGEX_MAIN = @"(?<Label>[^\r?\n]+\r?\n)* *((?<StartTime>\d{2}:\d{2}:\d{2}([,\.]\d+)?) *--> *(?<EndTime>\d{2}:\d{2}:\d{2}([,\.]\d+)?)) *(?<Content>(\r?\n[^\r?\n]+)*)";
+        private static string REGEX_MAIN = @"(?<Label>[^\r?\n]+\r?\n)* *((?<StartTime>(\d+:)?(\d+:)?\d{2}:\d{2}([,\.]\d+)?) *--> *(?<EndTime>(\d+:)?(\d+:)?\d{2}:\d{2}([,\.]\d+)?)) *(?<Content>(\r?\n[^\r?\n]+)*)";
         public SubtitleEntryCollection Parse(string text)
         {
             Regex regex = new Regex(TextParser.REGEX_MAIN);
