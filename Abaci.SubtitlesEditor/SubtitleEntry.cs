@@ -66,7 +66,7 @@ namespace Abaci.SubtitlesEditor
 
         public override string ToString()
         {
-            string text = $"{this.Label}\r\n{this.StartTime} --> {this.EndTime}\r\n{this.Content}";
+            string text = $"{this.Label}\r\n{this.StartTime.ToString(@"hh\:mm\:ss\.fff")} --> {this.EndTime.ToString(@"hh\:mm\:ss\.fff")}\r\n{this.Content}";
             text = text.Trim('\n', '\r', ' ').Trim('\n', '\r', ' ');
             return text;
         }
