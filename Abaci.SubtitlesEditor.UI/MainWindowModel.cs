@@ -14,6 +14,7 @@ namespace Abaci.SubtitlesEditor.UI
 {
     internal class MainWindowModel : INotifyPropertyChanged
     {
+        private readonly BackgroundWorker workerApplyOffset = new BackgroundWorker();
         private ITranslationProvider translator = null;
         private readonly SubtitleEntryFactory factory = new SubtitleEntryFactory();
         public event PropertyChangedEventHandler PropertyChanged;
@@ -21,6 +22,13 @@ namespace Abaci.SubtitlesEditor.UI
         public ICommand CommandOpenFile { get; private set; }
         public ICommand CommandSaveFile { get; private set; }
         public ICommand CommandTranslate { get; private set; }
+        public bool Busy
+        {
+            get
+            {
+                return this.workerApplyOffset.IsBusy;
+            }
+        }
         private TimeSpan _Offset = default(TimeSpan);
         public TimeSpan Offset
         {
@@ -32,7 +40,7 @@ namespace Abaci.SubtitlesEditor.UI
             {
                 this._Offset = value;
                 this.InvokePropertyChangedEvent(nameof(this.Offset));
-                this.OffsetString = this.Offset.ToString();
+                this.OffsetString = this.Offset.ToString(@"hh\:mm\:ss\.fff");
             }
         }
         public string OffsetString
@@ -105,6 +113,10 @@ namespace Abaci.SubtitlesEditor.UI
         }
         internal MainWindowModel()
         {
+            //
+            this.workerApplyOffset.DoWork += WorkerApplyOffset_DoWork;
+            this.workerApplyOffset.RunWorkerCompleted += WorkerApplyOffset_RunWorkerCompleted;
+            //
             //this.translator = new GoogleTranslationProvider();
             this.CommandApplyOffset = new RelayCommand(this.ExecuteCommandApplyOffset, this.CanExecuteCommandApplyOffset);
             this.CommandOpenFile = new RelayCommand(this.ExecuteCommandOpenFile, this.CanExecuteCommandOpenFile);
@@ -113,23 +125,38 @@ namespace Abaci.SubtitlesEditor.UI
         }
         private bool CanExecuteCommandApplyOffset()
         {
-            return true;
+            return !this.Busy;
         }
         private bool CanExecuteCommandOpenFile()
         {
-            return true;
+            return !this.Busy;
         }
         private bool CanExecuteCommandSaveFile()
         {
-            return true;
+            return !this.Busy;
         }
         private bool CanExecuteCommandTranslate()
         {
-            return true;
+            return !this.Busy;
         }
         private void ExecuteCommandApplyOffset()
         {
-            this.Subtitles.ApplyOffset(this.Offset);
+            Tuple<SubtitleEntryCollection, TimeSpan, string> values = null;
+            switch (this.SelectedTabIndex)
+            {
+                case 0:
+                    values = new Tuple<SubtitleEntryCollection, TimeSpan, string>(null, this.Offset, this.RawText);
+                    break;
+                case 1:
+                case 2:
+                    values = new Tuple<SubtitleEntryCollection, TimeSpan, string>(this.Subtitles, this.Offset, null);
+                    break;
+                default:
+                    break;
+            }
+            this.workerApplyOffset.RunWorkerAsync(values);
+            this.InvokePropertyChangedEvent(nameof(this.Busy));
+            return;
         }
         private void ExecuteCommandOpenFile()
         {
@@ -161,7 +188,7 @@ namespace Abaci.SubtitlesEditor.UI
             {
                 case 0:
                     this.RawText = this.Subtitles?.ToString();
-                    return;
+                    break;
                 case 1:
                     this.Subtitles = this.factory.CreateFromText(this.RawText);
                     break;
@@ -175,6 +202,41 @@ namespace Abaci.SubtitlesEditor.UI
             if(this.PropertyChanged!=null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(name));
             return;
+        }
+        private void WorkerApplyOffset_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Tuple<SubtitleEntryCollection, TimeSpan, string> values = e.Argument as Tuple<SubtitleEntryCollection, TimeSpan, string>;
+            SubtitleEntryCollection subtitles = new SubtitleEntryCollection();
+            if (values.Item3 != null)
+            {
+                SubtitleEntryFactory temp = new SubtitleEntryFactory();
+                subtitles = temp.CreateFromText(values.Item3);
+            }
+            else
+            {
+                subtitles = values.Item1;
+            }
+            subtitles.ApplyOffset(values.Item2);
+            Tuple<SubtitleEntryCollection, string> results = new Tuple<SubtitleEntryCollection, string>(subtitles, subtitles.ToString());
+            e.Result = results;
+            return;
+        }
+        private void WorkerApplyOffset_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Tuple<SubtitleEntryCollection, string> results = e.Result as Tuple<SubtitleEntryCollection, string>;
+            switch (this.SelectedTabIndex)
+            {
+                case 0:
+                    this.RawText = results.Item2;
+                    break;
+                case 1:
+                    this.Subtitles = results.Item1;
+                    break;
+                case 2:
+                    this.Subtitles = results.Item1;
+                    break;
+            }
+            this.InvokePropertyChangedEvent(nameof(this.Busy));
         }
     }
 }
