@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Abaci.SubtitlesEditor.UI"
         mc:Ignorable="d"
         Title="Subtitles Editor" Height="768" Width="1024" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closing="Window_Closing">
-    <Grid>
+    <Grid Background="LightGray">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="100"/>
@@ -45,14 +45,22 @@
             </TabItem>
         </TabControl>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <Button Width="120" Height="50" Margin="10" Content="_Open File" Command="{Binding CommandOpenFile}" Cursor="Hand"></Button>
-            <Button Width="120" Height="50" Margin="10" Content="_Save File" Command="{Binding CommandSaveFile}" Cursor="Hand"></Button>
-            <StackPanel Orientation="Vertical" Width="120" VerticalAlignment="Center" Margin="40,0,0,0">
-                <TextBox Width="120" Margin="0,0,0,5" Text="{Binding OffsetString}">
-                </TextBox>
-                <Button Width="120" Height="35" Content="Apply Offset" Margin="0,5,0,0" Command="{Binding CommandApplyOffset}" Cursor="Hand"></Button>
-            </StackPanel>
-            <StackPanel Orientation="Vertical" Width="120" VerticalAlignment="Center" Margin="40,0,0,0">
+            <Border BorderThickness="2" BorderBrush="Black" Margin="10" Background="LightSlateGray">
+                <StackPanel Orientation="Horizontal">
+                    <Button Width="140" Height="50" Margin="10" Content="_Open" FontSize="20" Command="{Binding CommandOpenFile}" Cursor="Hand"></Button>
+                    <Button Width="140" Height="50" Margin="10" Content="_Save" FontSize="20" Command="{Binding CommandSaveFile}" Cursor="Hand"></Button>
+
+                </StackPanel>
+
+            </Border>
+            <Border BorderThickness="2" BorderBrush="Black" Margin="10" Background="LightSlateGray">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Width="140" Margin="10,15,0,15" Text="{Binding Offset, StringFormat=hh\\:mm\\:ss\\.fff}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="20" Padding="8">
+                    </TextBox>
+                    <Button Width="140" Height="50" Content="_Apply Offset" Margin="10" FontSize="20" Command="{Binding CommandApplyOffset}" Cursor="Hand"></Button>
+                </StackPanel>
+            </Border>
+            <StackPanel Orientation="Vertical" Width="120" VerticalAlignment="Center" Margin="40,0,0,0" Visibility="Hidden">
                 <TextBox Width="120" Margin="0,0,0,5" Text="{Binding TargetLanguage}">
                 </TextBox>
                 <Button Width="120" Height="35" Content="Translate" Margin="0,5,0,0" Command="{Binding CommandTranslate}" Cursor="Hand"></Button>
