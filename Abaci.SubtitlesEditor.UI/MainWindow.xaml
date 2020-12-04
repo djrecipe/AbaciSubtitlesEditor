@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Abaci.SubtitlesEditor.UI"
         mc:Ignorable="d"
         Title="Subtitles Editor" Height="768" Width="1024" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closing="Window_Closing">
-    <Grid Background="LightGray">
+    <Grid Background="DarkGray">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="100"/>
@@ -14,7 +14,7 @@
         <TabControl VerticalAlignment="Stretch" Grid.Row="0" SelectedIndex="{Binding SelectedTabIndex}">
             <TabItem>
                 <TabItem.Header>
-                    <Label Height="40" Width="120" Content="Raw" FontSize="20" HorizontalContentAlignment="Center" >
+                    <Label Height="40" Width="120" Content="Text" FontSize="20" HorizontalContentAlignment="Center" >
                     </Label>
                 </TabItem.Header>
                 <Grid>
@@ -29,10 +29,31 @@
                 <Grid>
                     <DataGrid ItemsSource="{Binding Subtitles}" AutoGenerateColumns="False" MinRowHeight="30">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding StartTime, StringFormat=g}" Header="Start" Width="100"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding EndTime, StringFormat=g}" Header="End" Width="100"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding Label}" Header="Label"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding Content}" Header="Content" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding StartTime, StringFormat=g}" MinWidth="120" Header="Start">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="20"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding EndTime, StringFormat=g}" Header="End" MinWidth="120">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="20"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Label}" Header="Label" MinWidth="120">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="20"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Content}" Header="Content" Width="*" MinWidth="120">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="20"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
