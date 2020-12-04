@@ -5,21 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Abaci.SubtitlesEditor.UI"
         mc:Ignorable="d"
-        Title="Subtitles Editor" Height="450" Width="800">
+        Title="Subtitles Editor" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <TabControl VerticalAlignment="Stretch" Grid.Row="0" SelectedIndex="{Binding SelectedTabIndex}">
-            <TabItem Header="Raw">
+            <TabItem>
+                <TabItem.Header>
+                    <Label Height="40" Width="120" Content="Raw" FontSize="20" HorizontalContentAlignment="Center" >
+                    </Label>
+                </TabItem.Header>
                 <Grid>
                     <TextBox AcceptsReturn="True" Padding="10" VerticalScrollBarVisibility="Visible" Text="{Binding RawText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="List">
+            <TabItem>
+                <TabItem.Header>
+                    <Label Height="40" Width="120" Content="List" FontSize="20" HorizontalContentAlignment="Center" >
+                    </Label>
+                </TabItem.Header>
                 <Grid>
-                    <DataGrid ItemsSource="{Binding Subtitles}" AutoGenerateColumns="False">
+                    <DataGrid ItemsSource="{Binding Subtitles}" AutoGenerateColumns="False" MinRowHeight="30">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding StartTime, StringFormat=g}" Header="Start" Width="100"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding EndTime, StringFormat=g}" Header="End" Width="100"></DataGridTextColumn>
@@ -29,7 +37,12 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Timeline"></TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Label Height="40" Width="120" Content="Timeline" FontSize="20" HorizontalContentAlignment="Center" >
+                    </Label>
+                </TabItem.Header>
+            </TabItem>
         </TabControl>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
             <Button Width="120" Height="50" Margin="10" Content="_Open File" Command="{Binding CommandOpenFile}" Cursor="Hand"></Button>
