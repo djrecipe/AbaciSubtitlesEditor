@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Abaci.SubtitlesEditor.UI"
         mc:Ignorable="d"
-        Title="Subtitles Editor" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
+        Title="Subtitles Editor" Height="768" Width="1024" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>

@@ -80,6 +80,7 @@ namespace Abaci.SubtitlesEditor.UI
             }
             set
             {
+                Properties.Settings.Default.LastTab = value;
                 this._SelectedTabIndex = value;
                 this.UpdateData();
                 this.InvokePropertyChangedEvent(nameof(this.SelectedTabIndex));
@@ -169,6 +170,7 @@ namespace Abaci.SubtitlesEditor.UI
             bool? result = dialog.ShowDialog();
             if (result == true)
             {
+                Properties.Settings.Default.LastFilePath = dialog.FileName;
                 this.Subtitles = this.factory.CreateFromFile(dialog.FileName);
                 this.RawText = this.Subtitles.ToString();
             }
@@ -187,6 +189,15 @@ namespace Abaci.SubtitlesEditor.UI
         {
             Tuple<SubtitleEntryCollection, ITranslationProvider, string> values = new Tuple<SubtitleEntryCollection, ITranslationProvider, string>(this.Subtitles, this.translator, this.TargetLanguage);
             this.workerTranslate.RunWorkerAsync(values);
+        }
+        public void LoadSettings()
+        {
+            // TODO 12/4/20: determine a better way to update data so that it isn't invoked multiple times
+            string path = Properties.Settings.Default.LastFilePath;
+            if(!string.IsNullOrWhiteSpace(path) && File.Exists(path))
+                this.Subtitles = this.factory.CreateFromFile(path);
+            this.RawText = this.Subtitles?.ToString();
+            this.SelectedTabIndex = Properties.Settings.Default.LastTab;
         }
         private void UpdateData()
         {
@@ -208,6 +219,10 @@ namespace Abaci.SubtitlesEditor.UI
             if(this.PropertyChanged!=null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(name));
             return;
+        }
+        public void SaveSettings()
+        {
+            Properties.Settings.Default.Save();
         }
         private void WorkerApplyOffset_DoWork(object sender, DoWorkEventArgs e)
         {

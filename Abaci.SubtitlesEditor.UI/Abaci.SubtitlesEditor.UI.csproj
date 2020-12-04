@@ -100,10 +100,6 @@
       <Project>{29a8fabe-5b4c-4922-b797-868b49154943}</Project>
       <Name>Abaci.SubtitlesEditor</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Abaci.Translation.Google\Abaci.Translation.Google.csproj">
-      <Project>{75fd7b81-dc13-49df-a685-a93e56e82118}</Project>
-      <Name>Abaci.Translation.Google</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MvvmLightLibs">
