@@ -8,6 +8,6 @@ namespace Abaci.SubtitlesEditor
 {
     public interface ITranslationProvider
     {
-        string Translate(string text, string target_language);
+        Task<string> TranslateAsync(string text, string target_language);
     }
 }

@@ -30,12 +30,5 @@ namespace Abaci.SubtitlesEditor
             string text = string.Join("\r\n\r\n", this.Select(s => s.ToString()));
             return text;
         }
-        public void Translate(ITranslationProvider translator, string language)
-        {
-            foreach(SubtitleEntry subtitle in this)
-            {
-                subtitle.Content = translator.Translate(subtitle.Content, language);
-            }
-        }
     }
 }

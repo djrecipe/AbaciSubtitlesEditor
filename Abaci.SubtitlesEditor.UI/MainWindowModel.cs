@@ -15,6 +15,7 @@ namespace Abaci.SubtitlesEditor.UI
     internal class MainWindowModel : INotifyPropertyChanged
     {
         private readonly BackgroundWorker workerApplyOffset = new BackgroundWorker();
+        private readonly BackgroundWorker workerTranslate = new BackgroundWorker();
         private ITranslationProvider translator = null;
         private readonly SubtitleEntryFactory factory = new SubtitleEntryFactory();
         public event PropertyChangedEventHandler PropertyChanged;
@@ -26,7 +27,7 @@ namespace Abaci.SubtitlesEditor.UI
         {
             get
             {
-                return this.workerApplyOffset.IsBusy;
+                return this.workerApplyOffset.IsBusy || this.workerTranslate.IsBusy;
             }
         }
         private TimeSpan _Offset = default(TimeSpan);
@@ -116,6 +117,8 @@ namespace Abaci.SubtitlesEditor.UI
             //
             this.workerApplyOffset.DoWork += WorkerApplyOffset_DoWork;
             this.workerApplyOffset.RunWorkerCompleted += WorkerApplyOffset_RunWorkerCompleted;
+            this.workerTranslate.DoWork += WorkerTranslate_DoWork;
+            this.workerTranslate.RunWorkerCompleted += WorkerTranslate_RunWorkerCompleted;
             //
             //this.translator = new GoogleTranslationProvider();
             this.CommandApplyOffset = new RelayCommand(this.ExecuteCommandApplyOffset, this.CanExecuteCommandApplyOffset);
@@ -123,6 +126,8 @@ namespace Abaci.SubtitlesEditor.UI
             this.CommandSaveFile = new RelayCommand(this.ExecuteCommandSaveFile, this.CanExecuteCommandSaveFile);
             this.CommandTranslate = new RelayCommand(this.ExecuteCommandTranslate, this.CanExecuteCommandTranslate);
         }
+
+
         private bool CanExecuteCommandApplyOffset()
         {
             return !this.Busy;
@@ -180,7 +185,8 @@ namespace Abaci.SubtitlesEditor.UI
         }
         private void ExecuteCommandTranslate()
         {
-            this.Subtitles.Translate(this.translator, this.TargetLanguage);
+            Tuple<SubtitleEntryCollection, ITranslationProvider, string> values = new Tuple<SubtitleEntryCollection, ITranslationProvider, string>(this.Subtitles, this.translator, this.TargetLanguage);
+            this.workerTranslate.RunWorkerAsync(values);
         }
         private void UpdateData()
         {
@@ -237,6 +243,21 @@ namespace Abaci.SubtitlesEditor.UI
                     break;
             }
             this.InvokePropertyChangedEvent(nameof(this.Busy));
+        }
+        private void WorkerTranslate_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if(e.Error != null)
+                throw e.Error;
+            this.Subtitles = e.Result as SubtitleEntryCollection;
+            this.InvokePropertyChangedEvent(nameof(this.Busy));
+        }
+
+        private void WorkerTranslate_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Tuple<SubtitleEntryCollection, ITranslationProvider, string> values = e.Argument as Tuple<SubtitleEntryCollection, ITranslationProvider, string>;
+            Task<SubtitleEntryCollection> task = TranslationProviderTools.ReplaceContent(values.Item1, values.Item2, values.Item3);
+            task.Wait();
+            e.Result = task.Result;
         }
     }
 }
