@@ -82,8 +82,8 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBox Width="140" Margin="10,15,10,15" Text="{Binding Offset, StringFormat=hh\\:mm\\:ss\\.fff}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="20" Padding="8">
                     </TextBox>
-                    <Button Width="140" Height="50" Content="_Increase" Margin="10" FontSize="20" Command="{Binding CommandApplyOffset}" Cursor="Hand" Background="#F0E8E8"></Button>
-                    <Button Width="140" Height="50" Content="_Decrease" Margin="10" FontSize="20" Command="{Binding CommandApplyOffset}" Cursor="Hand" Background="#F0E8E8"></Button>
+                    <Button Width="140" Height="50" Content="_Add" Margin="10" FontSize="20" Command="{Binding CommandApplyOffset}" CommandParameter="{x:Static local:OffsetDirection.Increase}" Cursor="Hand" Background="#F0E8E8"></Button>
+                    <Button Width="140" Height="50" Content="S_ubtract" Margin="10" FontSize="20" Command="{Binding CommandApplyOffset}" CommandParameter="{x:Static local:OffsetDirection.Decrease}" Cursor="Hand" Background="#F0E8E8"></Button>
                 </StackPanel>
             </Border>
             <StackPanel Orientation="Vertical" Width="120" VerticalAlignment="Center" Margin="40,0,0,0" Visibility="Hidden">

@@ -30,12 +30,12 @@ namespace Abaci.SubtitlesEditor.UI
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Model.LoadSettings();
+            this.Model.Initialize();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            this.Model.SaveSettings();
+            this.Model.Cleanup();
         }
     }
 }

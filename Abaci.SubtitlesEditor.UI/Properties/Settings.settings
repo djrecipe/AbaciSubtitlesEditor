@@ -8,5 +8,8 @@
     <Setting Name="LastTab" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="Offset" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:00:00</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
