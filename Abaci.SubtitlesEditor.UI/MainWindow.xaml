@@ -27,7 +27,7 @@
                     </Label>
                 </TabItem.Header>
                 <Grid>
-                    <DataGrid ItemsSource="{Binding Subtitles}" AutoGenerateColumns="False" MinRowHeight="30">
+                    <DataGrid ItemsSource="{Binding Subtitles}" AutoGenerateColumns="False" MinRowHeight="22">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding StartTime, StringFormat=g}" MinWidth="120" Header="Start">
                                 <DataGridTextColumn.HeaderStyle>
@@ -36,6 +36,18 @@
                                         <Setter Property="FontSize" Value="20"/>
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="FontSize" Value="18"/>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Right" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="Padding" Value="3"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding EndTime, StringFormat=g}" Header="End" MinWidth="120">
                                 <DataGridTextColumn.HeaderStyle>
@@ -43,21 +55,60 @@
                                         <Setter Property="Background" Value="#F0F0F0"/>
                                         <Setter Property="FontSize" Value="20"></Setter>
                                     </Style>
-                                </DataGridTextColumn.HeaderStyle></DataGridTextColumn>
+                                </DataGridTextColumn.HeaderStyle>
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="FontSize" Value="18"/>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Left" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="Padding" Value="3"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Label}" Header="Label" MinWidth="120">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="Background" Value="#F0F0F0"/>
                                         <Setter Property="FontSize" Value="20"></Setter>
                                     </Style>
-                                </DataGridTextColumn.HeaderStyle></DataGridTextColumn>
+                                </DataGridTextColumn.HeaderStyle>
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="FontSize" Value="18"/>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Right" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="Padding" Value="3"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Content}" Header="Content" Width="*" MinWidth="120">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="Background" Value="#F0F0F0"/>
                                         <Setter Property="FontSize" Value="20"></Setter>
                                     </Style>
-                                </DataGridTextColumn.HeaderStyle></DataGridTextColumn>
+                                </DataGridTextColumn.HeaderStyle>
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="FontSize" Value="14"/>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Left" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="Padding" Value="3"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
