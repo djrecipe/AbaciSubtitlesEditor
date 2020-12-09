@@ -70,7 +70,7 @@
             </TabItem>
         </TabControl>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <Border BorderThickness="2" BorderBrush="Black" Margin="10" Background="#C0C0C5">
+            <Border BorderThickness="2" Margin="10" Background="#C0C0C5" BorderBrush="#DFDFFF">
                 <StackPanel Orientation="Horizontal">
                     <Button Width="140" Height="50" Margin="10" Content="_Open" FontSize="20" Command="{Binding CommandOpenFile}" Cursor="Hand" Background="#F0E8E8"></Button>
                     <Button Width="140" Height="50" Margin="10" Content="_Save" FontSize="20" Command="{Binding CommandSaveFile}" Cursor="Hand" Background="#F0E8E8"></Button>
@@ -78,7 +78,7 @@
                 </StackPanel>
 
             </Border>
-            <Border BorderThickness="2" BorderBrush="Black" Margin="10" Background="#C0C0C5">
+            <Border BorderThickness="2" Margin="10" Background="#C0C0C5" BorderBrush="#DFDFFF">
                 <StackPanel Orientation="Horizontal">
                     <TextBox Width="140" Margin="10,15,10,15" Text="{Binding Offset, StringFormat=hh\\:mm\\:ss\\.fff}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="20" Padding="8">
                     </TextBox>
