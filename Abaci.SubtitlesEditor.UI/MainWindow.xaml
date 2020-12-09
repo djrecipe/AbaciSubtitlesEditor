@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Abaci.SubtitlesEditor.UI"
         mc:Ignorable="d"
         Title="Subtitles Editor" Height="768" Width="1024" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closing="Window_Closing">
-    <Grid Background="DarkGray">
+    <Grid Background="#505050">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="100"/>
@@ -32,25 +32,29 @@
                             <DataGridTextColumn Binding="{Binding StartTime, StringFormat=g}" MinWidth="120" Header="Start">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
-                                        <Setter Property="FontSize" Value="20"></Setter>
+                                        <Setter Property="Background" Value="#F0F0F0"/>
+                                        <Setter Property="FontSize" Value="20"/>
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding EndTime, StringFormat=g}" Header="End" MinWidth="120">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="Background" Value="#F0F0F0"/>
                                         <Setter Property="FontSize" Value="20"></Setter>
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Label}" Header="Label" MinWidth="120">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="Background" Value="#F0F0F0"/>
                                         <Setter Property="FontSize" Value="20"></Setter>
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Content}" Header="Content" Width="*" MinWidth="120">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="Background" Value="#F0F0F0"/>
                                         <Setter Property="FontSize" Value="20"></Setter>
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle></DataGridTextColumn>
@@ -66,19 +70,20 @@
             </TabItem>
         </TabControl>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <Border BorderThickness="2" BorderBrush="Black" Margin="10" Background="LightSlateGray">
+            <Border BorderThickness="2" BorderBrush="Black" Margin="10" Background="#C0C0C5">
                 <StackPanel Orientation="Horizontal">
-                    <Button Width="140" Height="50" Margin="10" Content="_Open" FontSize="20" Command="{Binding CommandOpenFile}" Cursor="Hand"></Button>
-                    <Button Width="140" Height="50" Margin="10" Content="_Save" FontSize="20" Command="{Binding CommandSaveFile}" Cursor="Hand"></Button>
+                    <Button Width="140" Height="50" Margin="10" Content="_Open" FontSize="20" Command="{Binding CommandOpenFile}" Cursor="Hand" Background="#F0E8E8"></Button>
+                    <Button Width="140" Height="50" Margin="10" Content="_Save" FontSize="20" Command="{Binding CommandSaveFile}" Cursor="Hand" Background="#F0E8E8"></Button>
 
                 </StackPanel>
 
             </Border>
-            <Border BorderThickness="2" BorderBrush="Black" Margin="10" Background="LightSlateGray">
+            <Border BorderThickness="2" BorderBrush="Black" Margin="10" Background="#C0C0C5">
                 <StackPanel Orientation="Horizontal">
-                    <TextBox Width="140" Margin="10,15,0,15" Text="{Binding Offset, StringFormat=hh\\:mm\\:ss\\.fff}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="20" Padding="8">
+                    <TextBox Width="140" Margin="10,15,10,15" Text="{Binding Offset, StringFormat=hh\\:mm\\:ss\\.fff}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="20" Padding="8">
                     </TextBox>
-                    <Button Width="140" Height="50" Content="_Apply Offset" Margin="10" FontSize="20" Command="{Binding CommandApplyOffset}" Cursor="Hand"></Button>
+                    <Button Width="140" Height="50" Content="_Increase" Margin="10" FontSize="20" Command="{Binding CommandApplyOffset}" Cursor="Hand" Background="#F0E8E8"></Button>
+                    <Button Width="140" Height="50" Content="_Decrease" Margin="10" FontSize="20" Command="{Binding CommandApplyOffset}" Cursor="Hand" Background="#F0E8E8"></Button>
                 </StackPanel>
             </Border>
             <StackPanel Orientation="Vertical" Width="120" VerticalAlignment="Center" Margin="40,0,0,0" Visibility="Hidden">
