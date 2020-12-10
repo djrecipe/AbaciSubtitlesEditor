@@ -337,7 +337,8 @@ namespace Abaci.SubtitlesEditor.UI
             {
                 subtitles = values.Item1;
             }
-            subtitles.ApplyOffset(values.Item2);
+            bool only_selected = subtitles.Any(s => s.IsSelected); // if any items are selected, only offset selected items
+            subtitles.ApplyOffset(values.Item2, only_selected);
             Tuple<SubtitleEntryCollection, string> results = new Tuple<SubtitleEntryCollection, string>(subtitles, subtitles.ToString());
             e.Result = results;
             return;

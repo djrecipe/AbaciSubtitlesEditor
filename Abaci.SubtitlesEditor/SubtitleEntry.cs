@@ -23,6 +23,19 @@ namespace Abaci.SubtitlesEditor
                 this.InvokePropertyChangedEvent(nameof(Content));
             }
         }
+        private bool _IsSelected = false;
+        public bool IsSelected
+        {
+            get
+            {
+                return this._IsSelected;
+            }
+            set
+            {
+                this._IsSelected = value;
+                this.InvokePropertyChangedEvent(nameof(IsSelected));
+            }
+        }
         private string _Label = null;
         public string Label
         {

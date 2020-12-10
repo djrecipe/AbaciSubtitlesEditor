@@ -28,6 +28,17 @@
                 </TabItem.Header>
                 <Grid>
                     <DataGrid ItemsSource="{Binding Subtitles}" AutoGenerateColumns="False" MinRowHeight="22">
+                        <DataGrid.Resources>
+                            <SolidColorBrush x:Key="SelectionColorKey" Color="#9CBAFF"/>
+                            <Style TargetType="DataGridRow">
+                                <Style.Resources>
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{Binding Source={StaticResource SelectionColorKey}, Path=Color}"/>
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="{Binding Source={StaticResource SelectionColorKey}, Path=Color}"/>
+                                </Style.Resources>
+                                <Setter Property="IsSelected" Value="{Binding IsSelected}" />
+                            </Style>
+                        </DataGrid.Resources>
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding StartTime, StringFormat=g}" MinWidth="120" Header="Start">
                                 <DataGridTextColumn.HeaderStyle>
@@ -121,20 +132,20 @@
             </TabItem>
         </TabControl>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <Border BorderThickness="2" Margin="10" Background="#C0C0C5" BorderBrush="#DFDFFF">
+            <Border BorderThickness="2" Margin="10" Background="#C8C8CD" BorderBrush="#DFDFFF">
                 <StackPanel Orientation="Horizontal">
-                    <Button Width="140" Height="50" Margin="10" Content="_Open" FontSize="20" Command="{Binding CommandOpenFile}" Cursor="Hand" Background="#F0E8E8"></Button>
-                    <Button Width="140" Height="50" Margin="10" Content="_Save" FontSize="20" Command="{Binding CommandSaveFile}" Cursor="Hand" Background="#F0E8E8"></Button>
+                    <Button Width="140" Height="50" Margin="10" Content="_Open" FontSize="20" Command="{Binding CommandOpenFile}" Cursor="Hand" Background="#F4ECEC"></Button>
+                    <Button Width="140" Height="50" Margin="10" Content="_Save" FontSize="20" Command="{Binding CommandSaveFile}" Cursor="Hand" Background="#F4ECEC"></Button>
 
                 </StackPanel>
 
             </Border>
-            <Border BorderThickness="2" Margin="10" Background="#C0C0C5" BorderBrush="#DFDFFF">
+            <Border BorderThickness="2" Margin="10" Background="#C8C8CD" BorderBrush="#DFDFFF">
                 <StackPanel Orientation="Horizontal">
                     <TextBox Width="140" Margin="10,15,10,15" Text="{Binding Offset, StringFormat=hh\\:mm\\:ss\\.fff}" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="20" Padding="8">
                     </TextBox>
-                    <Button Width="140" Height="50" Content="_Add" Margin="10" FontSize="20" Command="{Binding CommandApplyOffset}" CommandParameter="{x:Static local:OffsetDirection.Increase}" Cursor="Hand" Background="#F0E8E8"></Button>
-                    <Button Width="140" Height="50" Content="S_ubtract" Margin="10" FontSize="20" Command="{Binding CommandApplyOffset}" CommandParameter="{x:Static local:OffsetDirection.Decrease}" Cursor="Hand" Background="#F0E8E8"></Button>
+                    <Button Width="140" Height="50" Content="_Add" Margin="10" FontSize="20" Command="{Binding CommandApplyOffset}" CommandParameter="{x:Static local:OffsetDirection.Increase}" Cursor="Hand" Background="#F4ECEC"></Button>
+                    <Button Width="140" Height="50" Content="S_ubtract" Margin="10" FontSize="20" Command="{Binding CommandApplyOffset}" CommandParameter="{x:Static local:OffsetDirection.Decrease}" Cursor="Hand" Background="#F4ECEC"></Button>
                 </StackPanel>
             </Border>
             <StackPanel Orientation="Vertical" Width="120" VerticalAlignment="Center" Margin="40,0,0,0" Visibility="Hidden">

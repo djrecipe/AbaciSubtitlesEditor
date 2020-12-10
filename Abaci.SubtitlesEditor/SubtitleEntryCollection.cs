@@ -16,9 +16,9 @@ namespace Abaci.SubtitlesEditor
                 return this.Items.Select(i => i.EndTime).Max();
             }
         }
-        public void ApplyOffset(TimeSpan offset)
+        public void ApplyOffset(TimeSpan offset, bool selected)
         {
-            foreach(SubtitleEntry subtitle in this)
+            foreach(SubtitleEntry subtitle in this.Where(s => s.IsSelected || !selected))
             {
                 subtitle.StartTime += offset;
                 subtitle.EndTime += offset;
