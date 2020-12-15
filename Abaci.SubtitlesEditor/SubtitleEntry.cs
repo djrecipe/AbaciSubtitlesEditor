@@ -46,7 +46,7 @@ namespace Abaci.SubtitlesEditor
             set
             {
                 this._Label = value;
-                this.InvokePropertyChangedEvent(nameof(Content));
+                this.InvokePropertyChangedEvent(nameof(Label));
             }
         }
         private TimeSpan _StartTime = default(TimeSpan);

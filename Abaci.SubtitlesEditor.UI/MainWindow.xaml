@@ -18,7 +18,7 @@
                     </Label>
                 </TabItem.Header>
                 <Grid>
-                    <TextBox AcceptsReturn="True" Padding="10" VerticalScrollBarVisibility="Visible" Text="{Binding RawText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                    <TextBox AcceptsReturn="True" Padding="10" VerticalScrollBarVisibility="Visible" Text="{Binding RawText, UpdateSourceTrigger=LostFocus, Mode=TwoWay, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"/>
                 </Grid>
             </TabItem>
             <TabItem>
@@ -27,7 +27,7 @@
                     </Label>
                 </TabItem.Header>
                 <Grid>
-                    <DataGrid ItemsSource="{Binding Subtitles}" AutoGenerateColumns="False" MinRowHeight="22">
+                    <DataGrid ItemsSource="{Binding Subtitles}" AutoGenerateColumns="False" MinRowHeight="22" SelectionChanged="DataGrid_SelectionChanged">
                         <DataGrid.Resources>
                             <SolidColorBrush x:Key="SelectionColorKey" Color="#9CBAFF"/>
                             <Style TargetType="DataGridRow">
@@ -129,6 +129,9 @@
                     <Label Height="40" Width="120" Content="Timeline" FontSize="20" HorizontalContentAlignment="Center" >
                     </Label>
                 </TabItem.Header>
+                <Grid>
+                    <local:Timeline></local:Timeline>
+                </Grid>
             </TabItem>
             <TabItem>
                 <TabItem.Header>

@@ -37,5 +37,10 @@ namespace Abaci.SubtitlesEditor.UI
         {
             this.Model.Cleanup();
         }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.Model.UpdateSelection();
+        }
     }
 }

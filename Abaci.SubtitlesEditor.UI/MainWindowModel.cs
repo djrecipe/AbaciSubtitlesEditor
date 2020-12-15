@@ -66,17 +66,17 @@ namespace Abaci.SubtitlesEditor.UI
                 this.InvokePropertyChangedEvent(nameof(this.OffsetString));
             }
         }
-        private string _RawText = null;
         public string RawText
         {
             get
             {
-                return this._RawText;
+                return this.Subtitles.ToString();
             }
             set
             {
-                this._RawText = value;
+                this._Subtitles = this.factory.CreateFromText(value);
                 this.InvokePropertyChangedEvent(nameof(this.RawText));
+                this.InvokePropertyChangedEvent(nameof(this.Subtitles));
             }
         }
         private int _SelectedTabIndex = 0;
@@ -90,8 +90,37 @@ namespace Abaci.SubtitlesEditor.UI
             {
                 Properties.Settings.Default.LastTab = value;
                 this._SelectedTabIndex = value;
-                this.UpdateData();
                 this.InvokePropertyChangedEvent(nameof(this.SelectedTabIndex));
+                if(this.SelectedTabIndex == 0)
+                    this.InvokePropertyChangedEvent(nameof(this.RawText));
+            }
+        }
+        public SubtitleEntry SelectedSubtitle
+        {
+            get
+            {
+                if(this.SelectedSubtitleIndex >= this.Subtitles.Count)
+                    return null;
+                return this.Subtitles[this.SelectedSubtitleIndex];
+            }
+            set
+            {
+                this.InvokePropertyChangedEvent(nameof(this.SelectedSubtitle));
+                return;
+            }
+        }
+        private int _SelectedSubtitleIndex = 0;
+        public int SelectedSubtitleIndex
+        {
+            get
+            {
+                return this._SelectedSubtitleIndex;
+            }
+            set
+            {
+                this._SelectedSubtitleIndex = value;
+                this.InvokePropertyChangedEvent(nameof(this.SelectedSubtitleIndex));
+                return;
             }
         }
         private SubtitleEntryCollection _Subtitles = new SubtitleEntryCollection();
@@ -105,6 +134,7 @@ namespace Abaci.SubtitlesEditor.UI
             {
                 this._Subtitles = value;
                 this.InvokePropertyChangedEvent(nameof(this.Subtitles));
+                this.InvokePropertyChangedEvent(nameof(this.RawText));
                 return;
             }
         }
@@ -264,7 +294,6 @@ namespace Abaci.SubtitlesEditor.UI
             if(!string.IsNullOrWhiteSpace(path) && File.Exists(path))
                 this.Subtitles = this.factory.CreateFromFile(path);
             this.Offset = Properties.Settings.Default.Offset;
-            this.RawText = this.Subtitles?.ToString();
             this.SelectedTabIndex = Properties.Settings.Default.LastTab;
         }
         public void Initialize()
@@ -282,23 +311,7 @@ namespace Abaci.SubtitlesEditor.UI
         private void OpenSubtitlesFile(string path)
         {
             this.Subtitles = this.factory.CreateFromFile(path);
-            this.RawText = this.Subtitles.ToString();
             return;
-        }
-        private void UpdateData()
-        {
-            switch(this.SelectedTabIndex)
-            {
-                case 0:
-                    this.RawText = this.Subtitles?.ToString();
-                    break;
-                case 1:
-                    this.Subtitles = this.factory.CreateFromText(this.RawText);
-                    break;
-                case 2:
-                    this.Subtitles = this.factory.CreateFromText(this.RawText);
-                    break;
-            }
         }
         private void InvokePropertyChangedEvent(string name)
         {
@@ -321,6 +334,11 @@ namespace Abaci.SubtitlesEditor.UI
             Tuple<SubtitleEntryCollection, ITranslationProvider, string> values = new Tuple<SubtitleEntryCollection, ITranslationProvider, string>(this.Subtitles, this.translator, this.TargetLanguage);
             this.workerTranslate.RunWorkerAsync(values);
             return;
+        }
+        public void UpdateSelection()
+        {
+            if(this.SelectedTabIndex == 1)
+                this.InvokePropertyChangedEvent(nameof(this.SelectedSubtitle));
         }
         #endregion
         #region Instance Event Methods
@@ -348,18 +366,7 @@ namespace Abaci.SubtitlesEditor.UI
             try
             {
                 Tuple<SubtitleEntryCollection, string> results = args.Result as Tuple<SubtitleEntryCollection, string>;
-                switch (this.SelectedTabIndex)
-                {
-                    case 0:
-                        this.RawText = results.Item2;
-                        break;
-                    case 1:
-                        this.Subtitles = results.Item1;
-                        break;
-                    case 2:
-                        this.Subtitles = results.Item1;
-                        break;
-                }
+                this.Subtitles = results.Item1;
                 this.InvokePropertyChangedEvent(nameof(this.Busy));
             }
             catch(Exception e)

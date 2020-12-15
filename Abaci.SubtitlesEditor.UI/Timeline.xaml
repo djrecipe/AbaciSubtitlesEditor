@@ -7,6 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto" MinHeight="100"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBox Grid.Row="1" Text="{Binding Path=SelectedSubtitle.Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"></TextBox>
     </Grid>
 </UserControl>

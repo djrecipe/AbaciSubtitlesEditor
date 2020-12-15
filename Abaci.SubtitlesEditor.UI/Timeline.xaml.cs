@@ -20,6 +20,7 @@ namespace Abaci.SubtitlesEditor.UI
     /// </summary>
     public partial class Timeline : UserControl
     {
+
         public Timeline()
         {
             InitializeComponent();
