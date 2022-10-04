@@ -21,8 +21,11 @@ namespace Abaci.SubtitlesEditor.UI
     public partial class Timeline : UserControl
     {
 
+        internal TimelineModel Model { get; set; }
         public Timeline()
         {
+            this.Model = new TimelineModel();
+            this.DataContext = this.Model;
             InitializeComponent();
         }
     }
