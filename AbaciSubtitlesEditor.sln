@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30709.132
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abaci.SubtitlesEditor.UI", "Abaci.SubtitlesEditor.UI\Abaci.SubtitlesEditor.UI.csproj", "{E1969AAE-9CD6-4D1F-AA01-E4DE996334F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abaci.SubtitlesEditor", "Abaci.SubtitlesEditor\Abaci.SubtitlesEditor.csproj", "{29A8FABE-5B4C-4922-B797-868B49154943}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abaci.SubtitlesEditor.Tests", "Abaci.SubtitlesEditor.Tests\Abaci.SubtitlesEditor.Tests.csproj", "{80ECE389-6AC9-4B3C-B4BA-69A81AA5C1D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abaci.SubtitlesEditor.GoogleTranslation", "Abaci.SubtitlesEditor.GoogleTranslation\Abaci.SubtitlesEditor.GoogleTranslation.csproj", "{58542553-43D3-471B-8600-A77E3D226029}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{80ECE389-6AC9-4B3C-B4BA-69A81AA5C1D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80ECE389-6AC9-4B3C-B4BA-69A81AA5C1D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80ECE389-6AC9-4B3C-B4BA-69A81AA5C1D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58542553-43D3-471B-8600-A77E3D226029}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58542553-43D3-471B-8600-A77E3D226029}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58542553-43D3-471B-8600-A77E3D226029}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58542553-43D3-471B-8600-A77E3D226029}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

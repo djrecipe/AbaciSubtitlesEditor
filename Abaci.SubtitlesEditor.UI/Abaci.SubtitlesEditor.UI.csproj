@@ -104,6 +104,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Abaci.SubtitlesEditor.GoogleTranslation\Abaci.SubtitlesEditor.GoogleTranslation.csproj">
+      <Project>{58542553-43d3-471b-8600-a77e3d226029}</Project>
+      <Name>Abaci.SubtitlesEditor.GoogleTranslation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Abaci.SubtitlesEditor\Abaci.SubtitlesEditor.csproj">
       <Project>{29a8fabe-5b4c-4922-b797-868b49154943}</Project>
       <Name>Abaci.SubtitlesEditor</Name>
