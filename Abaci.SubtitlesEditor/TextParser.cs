@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Abaci.SubtitlesEditor
 {
-    internal class TextParser
+    public class TextParser
     {
         private static string REGEX_MAIN = @"(?<Label>[^\r?\n]+\r?\n)* *((?<StartTime>(\d+:)?(\d+:)?\d{2}:\d{2}([,\.]\d+)?) *--> *(?<EndTime>(\d+:)?(\d+:)?\d{2}:\d{2}([,\.]\d+)?)) *(?<Content>(\r?\n[^\r?\n]+)*)";
         public SubtitleEntryCollection Parse(string text)

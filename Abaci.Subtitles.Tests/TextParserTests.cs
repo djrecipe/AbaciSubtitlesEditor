@@ -1,67 +1,63 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Abaci.SubtitlesEditor;
 using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Abaci.SubtitlesEditor.Tests
+namespace Abaci.Subtitles.Tests
 {
-    [TestClass]
-    [DeploymentItem("Abaci.SubtitlesEditor.Tests.TestRegex.srt")]
     public class TextParserTests
     {
         private readonly TextParser parser = new TextParser();
-        public TestContext TestContext { get;set;}
-        [TestMethod]
+        [Fact]
         public void TestFullParseFromFile()
         {
             int expected_count = 9;
             string text = File.ReadAllText("Abaci.SubtitlesEditor.Tests.TestRegex.srt");
             SubtitleEntryCollection list = parser.Parse(text);
-            foreach(SubtitleEntry entry in list)
+            foreach (SubtitleEntry entry in list)
             {
                 Console.WriteLine($"{entry.ToString()}\n");
             }
-            Assert.AreEqual(expected_count, list.Count, "Subtitle entry count mismatch");
+            Assert.Equal(expected_count, list.Count);
             return;
         }
-        [TestMethod]
+        [Fact]
         public void TestParseLongTimeFormatWithPeriod()
         {
             TimeSpan start_time = TimeSpan.FromSeconds(1.5);
             TimeSpan end_time = TimeSpan.FromSeconds(5.5);
             string text = $"TestParseMillisecondsEntry\n{start_time:G} --> {end_time:G}\nsubtitle content";
-            this.TestContext.WriteLine($"Parsing subtitle entry from text:\n'{text}'");
             SubtitleEntryCollection subtitles = this.parser.Parse(text);
-            Assert.AreEqual(1, subtitles.Count, "Subtitle count mismatch");
+            Assert.Equal(1, subtitles.Count);
             SubtitleEntry subtitle = subtitles[0];
-            Assert.AreEqual(start_time, subtitle.StartTime, "Start time mismatch");
-            Assert.AreEqual(end_time, subtitle.EndTime, "End time mismatch");
+            Assert.Equal(start_time, subtitle.StartTime);
+            Assert.Equal(end_time, subtitle.EndTime);
         }
-        [TestMethod]
+        [Fact]
         public void TestParseShortTimeFormatWithPeriod()
         {
             TimeSpan start_time = TimeSpan.FromSeconds(1.5);
             TimeSpan end_time = TimeSpan.FromSeconds(5.5);
             string text = $"TestParseMillisecondsEntry\n{start_time:g} --> {end_time:g}\nsubtitle content";
-            this.TestContext.WriteLine($"Parsing subtitle entry from text:\n'{text}'");
             SubtitleEntryCollection subtitles = this.parser.Parse(text);
-            Assert.AreEqual(1, subtitles.Count, "Subtitle count mismatch");
+            Assert.Equal(1, subtitles.Count);
             SubtitleEntry subtitle = subtitles[0];
-            Assert.AreEqual(start_time, subtitle.StartTime, "Start time mismatch");
-            Assert.AreEqual(end_time, subtitle.EndTime, "End time mismatch");
+            Assert.Equal(start_time, subtitle.StartTime);
+            Assert.Equal(end_time, subtitle.EndTime);
         }
-        [TestMethod]
+        [Fact]
         public void TestConstantShortTimeFormatWithPeriod()
         {
             TimeSpan start_time = TimeSpan.FromSeconds(1.5);
             TimeSpan end_time = TimeSpan.FromSeconds(5.5);
             string text = $"TestParseMillisecondsEntry\n{start_time:c} --> {end_time:c}\nsubtitle content";
-            this.TestContext.WriteLine($"Parsing subtitle entry from text:\n'{text}'");
             SubtitleEntryCollection subtitles = this.parser.Parse(text);
-            Assert.AreEqual(1, subtitles.Count, "Subtitle count mismatch");
+            Assert.Equal(1, subtitles.Count);
             SubtitleEntry subtitle = subtitles[0];
-            Assert.AreEqual(start_time, subtitle.StartTime, "Start time mismatch");
-            Assert.AreEqual(end_time, subtitle.EndTime, "End time mismatch");
+            Assert.Equal(start_time, subtitle.StartTime);
+            Assert.Equal(end_time, subtitle.EndTime);
         }
     }
 }

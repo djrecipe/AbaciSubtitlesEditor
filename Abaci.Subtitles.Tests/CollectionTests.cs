@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Abaci.SubtitlesEditor;
 
-namespace Abaci.SubtitlesEditor.Tests
+namespace Abaci.Subtitles.Tests
 {
-    [TestClass]
-    public class SubtitleEntryCollectionTests
+    public class CollectionTests
     {
-        [TestMethod]
+        [Fact]
         public void TestMaxTime()
         {
             int expected_max_seconds = 315;
@@ -21,7 +15,7 @@ namespace Abaci.SubtitlesEditor.Tests
             collection.Add(new SubtitleEntry { EndTime = TimeSpan.FromSeconds(0) });
             collection.Add(new SubtitleEntry { EndTime = TimeSpan.FromSeconds(17) });
             int result_max_seconds = (int)collection.EndTime.TotalSeconds;
-            Assert.AreEqual(expected_max_seconds, result_max_seconds, "Subtitle entry collection end time mismatch");
+            Assert.Equal(expected_max_seconds, result_max_seconds);
         }
     }
 }
