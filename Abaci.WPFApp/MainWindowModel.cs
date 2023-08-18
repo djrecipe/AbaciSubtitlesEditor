@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel;
 using System.Windows.Input;
 using Abaci.SubtitlesEditor;
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.CommandWpf;
 using Microsoft.Win32;
-using System.IO;
 
-namespace Abaci.SubtitlesEditor.UI
+namespace Abaci.WPFApp
 {
     internal enum OffsetDirection { Increase, Decrease };
     internal class MainWindowModel : INotifyPropertyChanged

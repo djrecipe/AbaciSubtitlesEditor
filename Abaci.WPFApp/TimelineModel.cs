@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel;
-using System.Windows.Input;
-using System.Windows;
+using Abaci.SubtitlesEditor;
 
-namespace Abaci.SubtitlesEditor.UI
+namespace Abaci.WPFApp
 {
-    public class TimelineModel : INotifyPropertyChanged
+    internal class TimelineModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public SubtitleEntry SelectedSubtitle
@@ -21,7 +20,7 @@ namespace Abaci.SubtitlesEditor.UI
             set
             {
                 SubtitleEntry entry = this._Subtitles?.FirstOrDefault(s => s.StartTime == value.StartTime && s.EndTime == value.EndTime);
-                if(entry != null)
+                if (entry != null)
                     entry.IsSelected = true;
                 return;
             }

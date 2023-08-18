@@ -1,9 +1,9 @@
-﻿<Window x:Class="Abaci.SubtitlesEditor.UI.MainWindow"
+﻿<Window x:Class="Abaci.WPFApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Abaci.SubtitlesEditor.UI"
+        xmlns:local="clr-namespace:Abaci.WPFApp"
         mc:Ignorable="d"
         Title="Subtitles Editor" Height="768" Width="1024" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid Background="#505050">
